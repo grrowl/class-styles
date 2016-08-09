@@ -1,13 +1,13 @@
 {
-  "name": "classnames",
-  "version": "2.2.5",
-  "description": "A simple utility for conditionally joining classNames together",
+  "name": "class-styles",
+  "version": "1.0.0-rc.1",
+  "description": "A simple utility for folding style objects like css classes",
   "main": "index.js",
-  "author": "Jed Watson",
+  "author": "Jed Watson, Tom McKenzie",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JedWatson/classnames.git"
+    "url": "https://github.com/grrowl/class-styles.git"
   },
   "scripts": {
     "benchmarks": "node ./benchmarks/run",

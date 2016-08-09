@@ -1,13 +1,13 @@
 {
-  "name": "classnames",
-  "version": "2.2.5",
-  "description": "A simple utility for conditionally joining classNames together",
+  "name": "class-styles",
+  "version": "1.0.0-rc.1",
+  "description": "A simple utility for folding style objects like css classes",
   "main": [
     "index.js",
     "bind.js",
     "dedupe.js"
   ],
-  "homepage": "https://github.com/JedWatson/classnames",
+  "homepage": "https://github.com/JedWatson/class-styles",
   "authors": [
     "Jed Watson"
   ],
@@ -21,7 +21,7 @@
     "css",
     "classes",
     "classname",
-    "classnames",
+    "class-styles",
     "util",
     "utility"
   ],

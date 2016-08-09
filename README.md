@@ -1,5 +1,13 @@
-Classnames
+~~Classnames~~ classStyles
 ===========
+
+[![Version](http://img.shields.io/npm/v/class-styles.svg)](https://www.npmjs.org/package/class-styles)
+
+Forked version of [classnames](https://github.com/JedWatson/classnames) to
+support inline styles generated from a group of objects and "class" names
+(really just root-level keys on the objects)
+
+## Original README
 
 [![Version](http://img.shields.io/npm/v/classnames.svg)](https://www.npmjs.org/package/classnames)
 [![Build Status](https://travis-ci.org/JedWatson/classnames.svg?branch=master)](https://travis-ci.org/JedWatson/classnames)

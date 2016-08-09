@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in classNames. Issues, PRs and suggestions welcome :)
+Thanks for your interest in class-styles. Issues, PRs and suggestions welcome :)
 
 Before working on a PR, please consider the following:
 
@@ -17,5 +17,5 @@ current published version. To run the benchmarks, `npm install` in the
 `./benchmarks` directory then run `npm run benchmarks` in the package root.
 
 Please be aware though that local benchmarks are just a smoke-signal; they will
-run in the v8 version that your node/iojs uses, while classNames is _most_
+run in the v8 version that your node/iojs uses, while class-styles is _most_
 often run across a wide variety of browsers and browser versions.
