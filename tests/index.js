@@ -1,62 +1,88 @@
 /* global describe, it */
 
 var assert = require('assert');
-var classNames = require('../');
+var classStyles = require('../index');
 
-describe('classNames', function () {
-	it('keeps object keys with truthy values', function () {
-		assert.equal(classNames({
-			a: true,
-			b: false,
-			c: 0,
-			d: null,
-			e: undefined,
-			f: 1
-		}), 'a f');
-	});
+var baseStyles = {
+	inner: {
+		padding: '10px',
+		backgroundColor: 'red'
+	},
+	outer: {
+		padding: '5px'
+	}
+}
+var otherStyles = {
+	inner: {
+		backgroundColor: 'yellow'
+	},
+	outer: {}
+}
 
-	it('joins arrays of class names and ignore falsy values', function () {
-		assert.equal(classNames('a', 0, null, undefined, true, 1, 'b'), 'a 1 b');
-	});
+var classStylesBound = classStyles.bind([ baseStyles, otherStyles ]);
 
-	it('supports heterogenous arguments', function () {
-		assert.equal(classNames({a: true}, 'b', 0), 'a b');
-	});
+describe('classStyles', function () {
+	it('folds style by single key', function () {
+		assert.deepStrictEqual(
+			classStylesBound('inner'),
+			{
+				padding: '10px',
+				backgroundColor: 'yellow'
+			})
+	})
 
-	it('should be trimmed', function () {
-		assert.equal(classNames('', 'b', {}, ''), 'b');
-	});
+	it('folds style by multiple keys', function () {
+		assert.deepStrictEqual(
+			classStylesBound('inner', 'outer'),
+			{
+				padding: '5px',
+				backgroundColor: 'yellow'
+			})
+	})
 
-	it('returns an empty string for an empty configuration', function () {
-		assert.equal(classNames({}), '');
-	});
+	it('folds style by multiple keys in single string', function () {
+		assert.deepStrictEqual(
+			classStylesBound('inner outer'),
+			{
+				padding: '5px',
+				backgroundColor: 'yellow'
+			})
+	})
+
+	it('folds style by multiple keys with static style before', function () {
+		assert.deepStrictEqual(
+			classStylesBound({ color: 'blue' }, 'inner outer'),
+			{
+				color: 'blue',
+				padding: '5px',
+				backgroundColor: 'yellow'
+			})
+	})
+
+	it('folds style by multiple keys with static style after', function () {
+		assert.deepStrictEqual(
+			classStylesBound('inner outer', { backgroundColor: 'blue' }),
+			{
+				padding: '5px',
+				backgroundColor: 'blue'
+			})
+	})
+
+	it('folds style by multiple keys without static style before (overridden)', function () {
+		assert.deepStrictEqual(
+			classStylesBound({ backgroundColor: 'blue' }, 'inner outer'),
+			{
+				padding: '5px',
+				backgroundColor: 'yellow'
+			})
+	})
 
 	it('supports an array of class names', function () {
-		assert.equal(classNames(['a', 'b']), 'a b');
-	});
-
-	it('joins array arguments with string arguments', function () {
-		assert.equal(classNames(['a', 'b'], 'c'), 'a b c');
-		assert.equal(classNames('c', ['a', 'b']), 'c a b');
-	});
-
-	it('handles multiple array arguments', function () {
-		assert.equal(classNames(['a', 'b'], ['c', 'd']), 'a b c d');
-	});
-
-	it('handles arrays that include falsy and true values', function () {
-		assert.equal(classNames(['a', 0, null, undefined, false, true, 'b']), 'a b');
-	});
-
-	it('handles arrays that include arrays', function () {
-		assert.equal(classNames(['a', ['b', 'c']]), 'a b c');
-	});
-
-	it('handles arrays that include objects', function () {
-		assert.equal(classNames(['a', {b: true, c: false}]), 'a b');
-	});
-
-	it('handles deep array recursion', function () {
-		assert.equal(classNames(['a', ['b', ['c', {d: true}]]]), 'a b c d');
+		assert.deepStrictEqual(
+			classStylesBound(['inner', 'outer']),
+			{
+				padding: '5px',
+				backgroundColor: 'yellow'
+			});
 	});
 });
