@@ -12,10 +12,13 @@
 	var hasOwn = {}.hasOwnProperty;
 
 	function classStyles () {
-		var styles = [];
+		var styles = [],
+			stylesArray = Array.isArray(this) ? this : [this]
 
-		if (!Array.isArray(this))
-			throw new Error('classStyles must be bound to an array of style objects')
+		if ((typeof window !== 'undefined' && this === window)
+			|| (typeof global !== 'undefined' && this === global)) {
+			throw new Error('classStyles must be bound to an object, or an array of objects')
+		}
 
 		for (var i = 0; i < arguments.length; i++) {
 			var arg = arguments[i];
@@ -33,13 +36,14 @@
 			}
 		}
 
-		// styles is now an array of strings (for lookups) and objects (for folding)
+		// styles is now an array of strings (for lookups then folding) and objects
+		// (for folding)
 
 		return styles.reduce(
 			(result, style) => (typeof style === 'object'
 				? objectAssign(result, style)
 				: objectAssign(result,
-						this.reduce((keyResult, boundStyle) => objectAssign(keyResult, boundStyle[style]), {})
+						stylesArray.reduce((keyResult, boundStyle) => objectAssign(keyResult, boundStyle[style]), {})
 					)
 			), {})
 	}

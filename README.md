@@ -9,14 +9,14 @@ support inline styles generated from a group of objects and "class" names
 
 ## Rules
 
-* classStyles *must* be bound to an array of objects. These objects *should*
-  have a `{ key: styleObject, otherKey: otherStyle }` structure.
+* classStyles can be bound to an object or an array of objects. These objects
+  should have a `{ key: styleObject, otherKey: otherStyle }` structure.
 * Arguments are applied from left to right, overwriting defined styles as they
   are applied.
 * String arguments are split by space (`" "`) and are applied in turn.
 * Object arguments are applied as raw style objects.
-* Arrays are recursed into, applying Strings and Object values according to the
-  above rules.
+* Arrays are recursed into, applying these rules to Strings, Objects and Arrays
+  as they're encountered.
 
 ## Usage
 
@@ -27,7 +27,7 @@ import classStyles from 'class-styles'
 const markupStyles = { container: { backgroundColor: 'white', margin: '0px auto' } },
   otherStyles = { container: { color: 'red' }, outer: { margin: '10px' } }
 
-// Bind style objects to classStyles. Must be an array.
+// Bind style objects to classStyles. Can be either an object, or an array of objects.
 const cx = classStyles.bind([ markupStyles, otherStyles ])
 
 cx('container outer')
