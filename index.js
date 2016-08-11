@@ -11,6 +11,24 @@
 	var objectAssign = require('object-assign')
 	var hasOwn = {}.hasOwnProperty;
 
+	// Filter "inherit"-like values from style objects so we don't clobber the
+	// underlying values
+	var isInheritValue = (value) => (
+		value === undefined || value === null || typeof value === 'boolean' || value === ''
+	)
+
+	var onlyInheritable = (object) => {
+		var result = {}
+
+		for (var key in object) {
+			if (hasOwn.call(object, key) && !isInheritValue(object[key])) {
+				result[key] = object[key]
+			}
+		}
+
+		return result
+	}
+
 	function classStyles () {
 		var styles = [],
 			stylesArray = Array.isArray(this) ? this : [this]
@@ -40,11 +58,12 @@
 		// (for folding)
 
 		return styles.reduce(
-			(result, style) => (typeof style === 'object'
-				? objectAssign(result, style)
-				: objectAssign(result,
-						stylesArray.reduce((keyResult, boundStyle) => objectAssign(keyResult, boundStyle[style]), {})
-					)
+			(result, style) => (typeof style === 'object' // else, it's an array
+				? objectAssign(result, onlyInheritable(style))
+				: objectAssign(result, stylesArray.reduce(
+						(keyResult, thisStyle) => objectAssign(keyResult, onlyInheritable(thisStyle[style])),
+						{}
+					))
 			), {})
 	}
 

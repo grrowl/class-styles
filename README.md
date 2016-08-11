@@ -17,6 +17,11 @@ support inline styles generated from a group of objects and "class" names
 * Object arguments are applied as raw style objects.
 * Arrays are recursed into, applying these rules to Strings, Objects and Arrays
   as they're encountered.
+* Property values of `undefined`, `null`, `""`, `true` or `false` are not
+  applied and will skip overwriting previously encountered properties.
+  * So `{ heading: { fontSize: "12pt" } }` followed by
+    `{ heading: { fontSize: null, color: "black" } }` will result in
+    `{ heading: { fontSize: "12pt", color: "black" } }`
 
 ## Usage
 
