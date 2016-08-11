@@ -19,9 +19,9 @@ support inline styles generated from a group of objects and "class" names
   as they're encountered.
 * Property values of `undefined`, `null`, `""`, `true` or `false` are not
   applied and will skip overwriting previously encountered properties.
-  * So `{ heading: { fontSize: "12pt" } }` followed by
-    `{ heading: { fontSize: null, color: "black" } }` will result in
-    `{ heading: { fontSize: "12pt", color: "black" } }`
+  * `{ heading: { fontSize: "12pt" } }` followed by
+  * `{ heading: { fontSize: null, color: "black" } }` will result in
+  * `{ heading: { fontSize: "12pt", color: "black" } }`
 
 ## Usage
 
