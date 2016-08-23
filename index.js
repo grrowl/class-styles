@@ -13,11 +13,11 @@
 
 	// Filter "inherit"-like values from style objects so we don't clobber the
 	// underlying values
-	var isInheritValue = (value) => (
-		value === undefined || value === null || typeof value === 'boolean' || value === ''
-	)
+	function isInheritValue (value) {
+		return (value === undefined || value === null || typeof value === 'boolean' || value === '')
+	}
 
-	var onlyInheritable = (object) => {
+	function onlyInheritable (object) {
 		var result = {}
 
 		for (var key in object) {
@@ -58,13 +58,18 @@
 		// (for folding)
 
 		return styles.reduce(
-			(result, style) => (typeof style === 'object' // else, it's an array
-				? objectAssign(result, onlyInheritable(style))
-				: objectAssign(result, stylesArray.reduce(
-						(keyResult, thisStyle) => objectAssign(keyResult, onlyInheritable(thisStyle[style])),
+			function (result, style) {
+				return (
+					typeof style === 'object' // else, it's an array
+					? objectAssign(result, onlyInheritable(style))
+					: objectAssign(result, stylesArray.reduce(
+						function (keyResult, thisStyle) {
+							return objectAssign(keyResult, onlyInheritable(thisStyle[style]))
+						},
 						{}
 					))
-			), {})
+				)
+			}, {})
 	}
 
 	if (typeof module !== 'undefined' && module.exports) {
