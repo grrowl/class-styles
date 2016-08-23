@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.0-rc.5
+
+Removed non-ES5 code for use in all environments.
+
 ## v1.0.0-rc.3
 
 Now can be bound to an object or an array of objects (but not window or global)
