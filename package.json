@@ -10,7 +10,6 @@
     "url": "https://github.com/grrowl/class-styles.git"
   },
   "scripts": {
-    "benchmarks": "node ./benchmarks/run",
     "unit": "mocha tests/*.js",
     "test": "npm run unit"
   },
