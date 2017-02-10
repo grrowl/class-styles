@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.0
+
+No module or API changes, released most recent RC as v1 stable.
+
 ## v1.0.0-rc.5
 
 Removed non-ES5 code for use in all environments.

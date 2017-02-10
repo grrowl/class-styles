@@ -1,6 +1,6 @@
 {
   "name": "class-styles",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0",
   "description": "A simple utility for folding style objects like css classes",
   "main": "index.js",
   "author": "Jed Watson, Tom McKenzie",
@@ -19,6 +19,7 @@
     "classes",
     "classname",
     "classnames",
+    "class-styles",
     "util",
     "utility"
   ],
