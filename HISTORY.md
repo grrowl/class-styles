@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.0
+
+Added Typescript typings for the package's external API.
+
 ## v1.0.0
 
 No module or API changes, released most recent RC as v1 stable.
